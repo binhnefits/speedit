@@ -1,5 +1,6 @@
 const { ApolloServer, gql } = require('apollo-server');
 const Reddit = require('reddit');
+const axios = require('axios');
 
 const reddit = new Reddit({
   username: 'speedit-app',
@@ -33,6 +34,7 @@ const typeDefs = gql`
     selftext_html: String!
     gilded: Int!
     stickied: Boolean!
+    is_self: Boolean!
     comments(depth: Int, limit: Int): [Comment!]!
   }
 
@@ -70,6 +72,10 @@ const resolvers = {
         []
       );
       return comments;
+    },
+    url_content_type: async (parent) => {
+      const res = await axios.get(parent.url);
+      console.log(res);
     },
   },
   SortType: {

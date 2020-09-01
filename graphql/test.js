@@ -13,7 +13,7 @@ const reddit = new Reddit({
 //   fs.writeFile('sample.json', JSON.stringify(res.data.children), () => '');
 // });
 
-reddit.get('/r/all/hot', { after: 't3_ij0ums' }).then((res) => {
+reddit.get('/r/all/hot').then((res) => {
   // console.log(res[1].data);
   fs.writeFile('posts.json', JSON.stringify(res), () => '');
 });
